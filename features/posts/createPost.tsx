@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import Router from "next/router";
+import { createPost } from "../../services/post/api";
 
-const Draft: React.FC = () => {
+const Draft = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
@@ -9,11 +10,8 @@ const Draft: React.FC = () => {
     e.preventDefault();
     try {
       const body = { title, content };
-      await fetch(`/api/post`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-      });
+      const result = await createPost(body);
+      console.log(result);
       await Router.push("/drafts");
     } catch (error) {
       console.error(error);
@@ -23,7 +21,7 @@ const Draft: React.FC = () => {
   return (
     <div>
       <form onSubmit={submitData}>
-        <h1>New Draft</h1>
+        <h1>New Draft Post</h1>
         <input
           autoFocus
           onChange={(e) => setTitle(e.target.value)}
@@ -43,34 +41,6 @@ const Draft: React.FC = () => {
           or Cancel
         </a>
       </form>
-      <style jsx>{`
-        .page {
-          background: white;
-          padding: 3rem;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        input[type="text"],
-        textarea {
-          width: 100%;
-          padding: 0.5rem;
-          margin: 0.5rem 0;
-          border-radius: 0.25rem;
-          border: 0.125rem solid rgba(0, 0, 0, 0.2);
-        }
-
-        input[type="submit"] {
-          background: #ececec;
-          border: 0;
-          padding: 1rem 2rem;
-        }
-
-        .back {
-          margin-left: 1rem;
-        }
-      `}</style>
     </div>
   );
 };
