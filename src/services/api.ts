@@ -6,7 +6,7 @@ export const httpInstance = (showLoading = false, firstToken = '') => {
     const instance = axios.create()
 
     let token = ''
-    // firstToken !== '' ? firstToken : rematchStore.getState().User.token
+    // firstToken !== '' ? firstToken : store.getState().User.token
 
     instance.defaults.timeout = 20000
 
@@ -22,7 +22,7 @@ export const httpInstance = (showLoading = false, firstToken = '') => {
 
     instance.interceptors.request.use(
         (request) => {
-            // if (showLoading) rematchStore.dispatch.Feedback.showLoader(true)
+            // if (showLoading) store.dispatch.Feedback.showLoader(true)
             return request
         },
         (error) => {
@@ -33,8 +33,8 @@ export const httpInstance = (showLoading = false, firstToken = '') => {
 
     instance.interceptors.response.use(
         (response) => {
-            // if (showLoading) rematchStore.dispatch.Feedback.showLoader(false)
-            // rematchStore.dispatch.Feedback.connectionError(false)
+            // if (showLoading) store.dispatch.Feedback.showLoader(false)
+            // store.dispatch.Feedback.connectionError(false)
             return response
         },
         (error) => {

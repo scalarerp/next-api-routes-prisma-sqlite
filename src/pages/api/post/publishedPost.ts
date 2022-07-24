@@ -6,6 +6,6 @@ export default async function handle(
     res: NextApiResponse
 ) {
     const result = await getAllPublishedPosts()
-    console.log('getAllPublishedPosts', result)
+    // console.log('getAllPublishedPosts', result)
     res.status(200).json(result)
 }

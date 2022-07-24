@@ -24,19 +24,10 @@ export const getPostById = async (id: number) => {
     return result
 }
 
-export const getAllPublishedPosts = async () => {
+export const getAllDraftPosts = async (isDraft: boolean) => {
     const result = await prisma.post.findMany({
         where: {
-            published: true,
-        },
-    })
-    return result
-}
-
-export const getAllDraftPosts = async () => {
-    const result = await prisma.post.findMany({
-        where: {
-            published: false,
+            published: isDraft,
         },
     })
     return result

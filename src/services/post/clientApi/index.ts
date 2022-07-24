@@ -31,13 +31,16 @@ export const getPostById = async (id: number): Promise<Post> => {
 }
 
 export const getAllPublishedPosts = async (): Promise<Post[]> => {
-    const result = await httpInstance().get(`${url}publishedPosts`)
+    console.log('start getAllPublishedPosts ')
+    const result = await httpInstance().post(`${url}isDraft`, {
+        isDraft: false,
+    })
     console.log('getAllPublishedPosts result', result)
     return result.data
 }
 
 export const getAllDraftPosts = async (): Promise<Post[]> => {
-    const result = await httpInstance().get(`${url}draftPosts`)
-    console.log('getAllDraftPosts result', result)
+    const result = await httpInstance().post(`${url}isDraft`, { isDraft: true })
+    // console.log('getAllDraftPosts result', result)
     return result.data
 }
